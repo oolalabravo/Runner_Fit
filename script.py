@@ -316,7 +316,7 @@ def Get_data(start_time, end_time):
 
 
 def data_log(content):
-    with open(r"F:\programs\Google Fit\Fitness log.txt", "a", encoding="utf-8") as file:
+    with open(LOG_FILE_PATH, "a", encoding="utf-8") as file:
         file.write(content + "\n\n")
 
 # ========== EMAIL SENDER ==========
