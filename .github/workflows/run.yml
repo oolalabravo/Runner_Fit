@@ -1,0 +1,37 @@
+name: Daily Google Fit Mail
+
+on:
+  schedule:
+    - cron: '30 6 * * *'  # Runs every day at 12:00 PM IST (6:30 AM UTC)
+  workflow_dispatch:      # Allows manual trigger if needed
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🔒 Create Secrets
+        env:
+          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
+          TOKEN2_JSON: ${{ secrets.TOKEN2_JSON }}
+          CLIENT_SECRET_JSON: ${{ secrets.CLIENT_SECRET_JSON }}
+        run: |
+          echo "$TOKEN_JSON" > token.json
+          echo "$TOKEN2_JSON" > token2.json
+          echo "$CLIENT_SECRET_JSON" > client_secret.json
+
+      - name: 🚀 Run Script
+        run: python your_script.py  # Replace with actual script filename
