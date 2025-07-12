@@ -34,4 +34,4 @@ jobs:
           echo "$CLIENT_SECRET_JSON" > client_secret.json
 
       - name: 🚀 Run Script
-        run: python your_script.py  # Replace with actual script filename
+        run: python script.py  # Replace with actual script filename
